@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-portfolio-bg: #0B0F19;
+  --color-portfolio-primary: #6366F1;
+  --color-portfolio-accent: #8B5CF6;
+  --color-portfolio-text: #F9FAFB;
+  --color-portfolio-card: #111827;
+  --color-portfolio-secondary: #9CA3AF;
+
+  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-code: "Fira Code", "JetBrains Mono", monospace;
+  
+  --tracking-tightest: -0.05em;
+  --tracking-tighter: -0.02em;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-portfolio-bg text-portfolio-text font-inter antialiased transition-colors duration-300;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-outfit tracking-tighter leading-tight;
+  }
+
+  p {
+    @apply text-portfolio-secondary leading-relaxed;
+  }
+}
+
+@layer components {
+  /* Global Container */
+  .container-custom {
+    @apply max-w-[1240px] mx-auto px-6 w-full;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-portfolio-card/40 backdrop-blur-xl border border-white/5;
+  }
+
+  /* Section Spacing */
+  .section-padding {
+    @apply py-24 lg:py-36;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-portfolio-primary to-portfolio-accent hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] text-white px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border border-white/10 text-portfolio-text hover:bg-white/5 px-8 py-3.5 rounded-xl font-semibold transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 backdrop-blur-sm;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-portfolio-bg;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-portfolio-primary/20 rounded-full hover:bg-portfolio-primary/40;
+}
+
+/* Animations and Utilities */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.reveal {
+  @apply opacity-0 translate-y-4 transition-all duration-1000 ease-out;
+}
+
+.reveal-active {
+  @apply opacity-100 translate-y-0;
+}
+
+/* Text Gradient Utility */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-portfolio-primary to-portfolio-accent;
+}
